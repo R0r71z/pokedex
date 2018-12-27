@@ -3,14 +3,19 @@ import {
   GET_POKEMONS_SUCCESS,
   GET_POKEMONS_FAIL,
   SET_POKEMONS,
-  FILTER_POKEMONS
+  FILTER_POKEMONS,
+  SET_TYPE_FILTER,
+  SET_TYPES
 } from '../constants/page'
 
 const initialState = {
   isFetched: false,
   error: null,
   pokemons: [],
-  displayedPokemons: []
+  displayedPokemons: [],
+  pokemonTypeFilter: false,
+  pokemonType: '',
+  pokemonTypes: []
 }
 
 export default function(state = initialState, action) {
@@ -46,6 +51,18 @@ export default function(state = initialState, action) {
         displayedPokemons: action.payload
       }
 
+    case SET_TYPE_FILTER:
+      return {
+        ...state,
+        pokemonTypeFilter: !(action.payload.toLowerCase() === 'all'),
+        pokemonType: action.payload
+      }
+
+    case SET_TYPES:
+      return {
+        ...state,
+        pokemonTypes: action.payload
+      }
     default:
       return state
   }
