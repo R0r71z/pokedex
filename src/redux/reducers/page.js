@@ -3,6 +3,7 @@ import {
   GET_POKEMONS_SUCCESS,
   GET_POKEMONS_FAIL,
   SET_POKEMONS,
+  SET_FILTER,
   FILTER_POKEMONS
 } from '../constants/page'
 
@@ -10,7 +11,11 @@ const initialState = {
   isFetched: false,
   error: null,
   pokemons: [],
-  displayedPokemons: []
+  displayedPokemons: [],
+  filters: {
+    nameFilter: true,
+    typeFilter: false
+  }
 }
 
 export default function(state = initialState, action) {
@@ -44,6 +49,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         displayedPokemons: action.payload
+      }
+
+    case SET_FILTER:
+      return {
+        ...state,
+        filters: action.payload
       }
 
     default:
